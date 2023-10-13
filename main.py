@@ -16,18 +16,12 @@ class NSFWDector:
         image = np.asarray(image, dtype=np.float32) / 255
         return image
 
-    def predict(self, images: list[Image.Image]):
-        images = [self.process_image(img) for img in images]
-
-        model_preds = self.model.run(None, {'input': images})
-
-        probs = []
-        for single_preds in model_preds[0]:
-            single_probs = {}
-            for i, pred in enumerate(single_preds):
-                single_probs[self.categories[i]] = round(float(pred), 4)
-            probs.append(single_probs)
-
+    def predict(self, image: Image.Image):
+        image = self.process_image(image)
+        preds = self.model.run(None, {'input': [image]})[0][0]
+        probs = {}
+        for i, pred in enumerate(preds):
+            probs[self.categories[i]] = round(float(pred), 4)
         return probs
 
 detector = NSFWDector('model/mobilenet_v2_140_224.onnx')
@@ -41,9 +35,8 @@ def detect(request: Request):
     files = request.files.getlist('images')
     if not files:
         return 'No images found', 400
-
-    images = [Image.open(f) for f in files]
-
-    preds = detector.predict(images)
-    return preds
-
+    
+    return [
+        detector.predict(Image.open(f))
+        for f in files
+    ]
