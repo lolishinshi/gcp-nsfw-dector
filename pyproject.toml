@@ -1,0 +1,20 @@
+[project]
+name = "nsfw-model"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Aloxaf", email = "Aloxafx@gmail.com"},
+]
+dependencies = [
+    "numpy>=1.25.2",
+    "pillow>=10.0.1",
+    "onnxruntime>=1.16.1",
+    "functions-framework>=3.4.0",
+]
+requires-python = ">=3.11"
+readme = "README.md"
+license = {text = "MIT"}
+
+[tool.pdm.dev-dependencies]
+dev = [
+]
