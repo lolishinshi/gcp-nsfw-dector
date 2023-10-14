@@ -1,5 +1,5 @@
 FUNCTION_NAME=nsfw-model
-REGION=asia-southeast1
+REGION=us-east1
 
 deploy:
 	gcloud functions deploy $(FUNCTION_NAME) \
