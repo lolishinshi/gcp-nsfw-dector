@@ -16,7 +16,7 @@ jobs:
       - name: Download model
         uses: robinraju/release-downloader@v1.8
         with:
-          repo: lolishinshi/gcp-nsfw-dector
+          repository: lolishinshi/gcp-nsfw-dector
           tag: mobilenet_v2_140_224
           fileName: mobilenet_v2_140_224.onnx
           out-file-path: model
