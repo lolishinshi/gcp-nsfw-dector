@@ -30,4 +30,4 @@ jobs:
         uses: 'google-github-actions/setup-gcloud@v1'
 
       - name: Deploy Cloud Function
-        run: make deploy
+        run: make deploy USEROUTPUT=false
