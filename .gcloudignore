@@ -17,3 +17,5 @@ node_modules
 #!include:.gitignore
 
 !model/*
+
+gha-creds-*.json

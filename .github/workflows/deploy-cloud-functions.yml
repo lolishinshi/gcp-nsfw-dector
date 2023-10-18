@@ -1,0 +1,33 @@
+name: Deploy Cloud Functions
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Download model
+        uses: robinraju/release-downloader@v1.8
+        with:
+          repo: lolishinshi/gcp-nsfw-dector
+          tag: mobilenet_v2_140_224
+          fileName: mobilenet_v2_140_224.onnx
+          out-file-path: model
+
+      - name: Authenticate with Google Cloud
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
+
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v1'
+
+      - name: Deploy Cloud Function
+        run: make deploy
