@@ -6,7 +6,7 @@ deploy:
 	gcloud functions deploy $(FUNCTION_NAME) \
 		--gen2 \
 		--runtime python311 \
-		--memory 300MB \
+		--memory 350MB \
 		--timeout 10s \
 		--region $(REGION) \
 		--source=. \
